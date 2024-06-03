@@ -1,17 +1,25 @@
-# Use an official Python runtime as a parent image
-FROM python
+# Base image
+FROM python:3.10
+
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
 
 # Set the working directory in the container to /app
 WORKDIR /app
 
+COPY ./requirements.txt /tmp/requirements.txt
+
+# Create a virtual environment and install dependencies
+# Set the user to use when running this image
+RUN python -m venv /py && \
+    /py/bin/pip install --upgrade pip && \
+    /py/bin/pip install -r /tmp/requirements.txt && \
+    rm -rf /tmp
+
 # Add the contents in the app directory into the container at /app
-ADD ./app /app
+COPY ./app /app
 
-# Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Make port 5000 available to the world outside this container
-EXPOSE 5000
-
-# Run app.py when the container launches
-CMD ["python", "app.py"]
+# Set the path to the virtual environment
+ENV PATH="/py/bin:$PATH"
