@@ -1,0 +1,10 @@
+{
+  "python.linting.enabled": true,
+  "python.linting.flake8Enabled": true,
+  "extensions.ignoreRecommendations": false,
+  "files.trimTrailingWhitespace": true,
+  "editor.formatOnSave": false,
+  "editor.detectIndentation": true,
+  "editor.trimAutoWhitespace": false,
+  "python.analysis.extraPaths": ["./erport"],
+}

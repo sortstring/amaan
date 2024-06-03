@@ -1,0 +1,15 @@
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./app:/app
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_RUN_HOST=0.0.0.0
+      - PHONE_NUMBER_ID=+14155555555
+      - VERIFY_TOKEN=verify_token
+      - ACCESS_TOKEN=access_token
+      - WHATSAPP_BUSINESS_ACCOUNT_ID=whatsapp_business_account_id
+    command: ["flask", "run"]
